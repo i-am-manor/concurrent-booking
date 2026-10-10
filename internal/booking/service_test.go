@@ -9,7 +9,8 @@ import (
 )
 
 func TestConcurrentBooking_ExactlyOneWins(t *testing.T) {
-	store := NewMemoryStore()
+	// store := NewMemoryStore() // race condition might occur
+	store := NewConcurentStore()
 	svc := NewService(store)
 
 	const numGoroutines = 100 // 100 users trying to book a seat at the same time
